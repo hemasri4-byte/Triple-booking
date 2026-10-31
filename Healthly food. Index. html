@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nourish | Healthy Food & Nutrition</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --green: #2d7a46;
+    --dark: #183d29;
+    --light: #f3f8ef;
+    --orange: #f3a34b;
+}
+
+body {
+    background: #fff;
+    color: #26382c;
+}
+
+header {
+    background: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px #00000010;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    color: var(--green);
+}
+
+.logo span {
+    color: var(--orange);
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #344638;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: var(--green);
+}
+
+.hero {
+    min-height: 540px;
+    background: linear-gradient(90deg, #102f20e8, #102f2080),
+    url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1600') center/cover;
+    display: flex;
+    align-items: center;
+    padding: 70px 9%;
+    color: white;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--orange);
+    color: #26382c;
+    padding: 13px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: white;
+    transform: translateY(-3px);
+}
+
+section {
+    padding: 75px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    font-size: 35px;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    color: #777;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.category {
+    background: var(--light);
+    text-align: center;
+    padding: 30px 15px;
+    border-radius: 18px;
+    transition: .3s;
+}
+
+.category:hover {
+    transform: translateY(-7px);
+    background: #e2f0df;
+}
+
+.category .emoji {
+    font-size: 45px;
+    margin-bottom: 12px;
+}
+
+.category h3 {
+    color: var(--dark);
+}
+
+.recipes {
+    background: #fafcf8;
+}
+
+.recipe-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.recipe-controls input {
+    padding: 12px 18px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    width: min(300px, 100%);
+    outline: none;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.recipe-card {
+    background: white;
+    border-radius: 17px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px #0000000c;
+    transition: .3s;
+}
+
+.recipe-card:hover {
+    transform: translateY(-7px);
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.recipe-info {
+    padding: 22px;
+}
+
+.recipe-info h3 {
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.recipe-info p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.recipe-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.recipe-info button {
+    width: 100%;
+}
+
+.no-results {
+    text-align: center;
+    grid-column: 1 / -1;
+    color: #777;
+}
+
+.nutrition {
+    background: var(--light);
+}
+
+.nutrition-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.nutrition-card {
+    background: white;
+    padding: 30px 15px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.nutrition-card .emoji {
+    font-size: 40px;
+}
+
+.nutrition-card h3 {
+    color: var(--green);
+    margin: 12px 0;
+}
+
+.meal-plan {
+    background: white;
+}
+
+.meal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.meal-table th,
+.meal-table td {
+    padding: 17px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.meal-table th {
+    background: var(--green);
+    color: white;
+}
+
+.meal-table tr:hover {
+    background: #f4f9f1;
+}
+
+.tips {
+    background: #f9fbf6;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.tip {
+    padding: 25px;
+    background: white;
+    border-radius: 15px;
+    border-left: 4px solid var(--green);
+}
+
+.tip h3 {
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.tip p {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.newsletter {
+    text-align: center;
+    background: var(--dark);
+    color: white;
+}
+
+.newsletter h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.newsletter p {
+    margin-bottom: 25px;
+}
+
+.newsletter input {
+    padding: 13px 18px;
+    width: min(300px, 100%);
+    border-radius: 25px;
+    border: none;
+    margin: 5px;
+}
+
+footer {
+    background: #10291b;
+    color: white;
+    padding: 30px 8%;
+    text-align: center;
+}
+
+footer p {
+    color: #c2d2c5;
+    font-size: 14px;
+}
+
+@media(max-width: 900px) {
+    .recipe-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .categories,
+    .nutrition-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tips-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    nav {
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    .hero {
+        min-height: 450px;
+        padding: 45px 7%;
+    }
+
+    .recipe-grid,
+    .categories,
+    .nutrition-grid,
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 55px 6%;
+    }
+
+    .meal-table th,
+    .meal-table td {
+        padding: 10px 7px;
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Nourish<span>.</span></div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#recipes">Recipes</a>
+        <a href="#nutrition">Nutrition</a>
+        <a href="#mealplan">Meal Plan</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Eat Healthy.<br>Live Better.</h1>
+        <p>
+            Discover delicious healthy recipes, balanced meal plans
+            and simple nutrition tips to transform your lifestyle.
+            Your journey towards a healthier life starts here.
+        </p>
+        <a href="#recipes" class="btn">Explore Recipes</a>
+    </div>
+</section>
+
+<section id="categories">
+    <div class="section-title">
+        <h2>Explore Food Categories</h2>
+        <p>Find healthy options for every meal of your day.</p>
+    </div>
+
+    <div class="categories">
+        <div class="category">
+            <div class="emoji">🥑</div>
+            <h3>Breakfast</h3>
+        </div>
+
+        <div class="category">
+            <div class="emoji">🥗</div>
+            <h3>Lunch</h3>
+        </div>
+
+        <div class="category">
+            <div class="emoji">🍲</div>
+            <h3>Dinner</h3>
+        </div>
+
+        <div class="category">
+            <div class="emoji">🍎</div>
+            <h3>Snacks</h3>
+        </div>
+    </div>
+</section>
+
+<section class="recipes" id="recipes">
+    <div class="section-title">
+        <h2>Healthy Recipes</h2>
+        <p>Nutritious food that tastes amazing.</p>
+    </div>
+
+    <div class="recipe-controls">
+        <input type="text" id="search" placeholder="Search recipes...">
+
+        <button class="filter-btn active" data-category="All">All</button>
+        <button class="filter-btn" data-category="Breakfast">Breakfast</button>
+        <button class="filter-btn" data-category="Lunch">Lunch</button>
+        <button class="filter-btn" data-category="Dinner">Dinner</button>
+        <button class="filter-btn" data-category="Snacks">Snacks</button>
+    </div>
+
+    <div class="recipe-grid" id="recipeGrid"></div>
+</section>
+
+<section class="nutrition" id="nutrition">
+    <div class="section-title">
+        <h2>Understand Nutrition</h2>
+        <p>Essential nutrients for a balanced lifestyle.</p>
+    </div>
+
+    <div class="nutrition-grid">
+        <div class="nutrition-card">
+            <div class="emoji">🥚</div>
+            <h3>Protein</h3>
+            <p>Supports muscle growth and tissue repair.</p>
+        </div>
+
+        <div class="nutrition-card">
+            <div class="emoji">🍞</div>
+            <h3>Carbohydrates</h3>
+            <p>Provides energy for daily activities.</p>
+        </div>
+
+        <div class="nutrition-card">
+            <div class="emoji">🥜</div>
+            <h3>Healthy Fats</h3>
+            <p>Supports brain health and hormone production.</p>
+        </div>
+
+        <div class="nutrition-card">
+            <div class="emoji">🥦</div>
+            <h3>Vitamins</h3>
+            <p>Helps maintain immunity and overall health.</p>
+        </div>
+    </div>
+</section>
+
+<section class="meal-plan" id="mealplan">
+    <div class="section-title">
+        <h2>Weekly Meal Plan</h2>
+        <p>A simple example of balanced daily eating.</p>
+    </div>
+
+    <div style="overflow-x:auto">
+    <table class="meal-table">
+        <tr>
+            <th>Day</th>
+            <th>Breakfast</th>
+            <th>Lunch</th>
+            <th>Dinner</th>
+        </tr>
+        <tr>
+            <td>Monday</td>
+            <td>Oatmeal & Fruits</td>
+            <td>Brown Rice & Dal</td>
+            <td>Vegetable Soup</td>
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            <td>Idli & Sambar</td>
+            <td>Chapati & Paneer</td>
+            <td>Vegetable Salad</td>
+        </tr>
+        <tr>
+            <td>Wednesday</td>
+            <td>Fruit Smoothie</td>
+            <td>Quinoa & Vegetables</td>
+            <td>Dal & Roti</td>
+        </tr>
+        <tr>
+            <td>Thursday</td>
+            <td>Vegetable Upma</td>
+            <td>Rice & Chickpeas</td>
+            <td>Grilled Vegetables</td>
+        </tr>
+        <tr>
+            <td>Friday</td>
+            <td>Boiled Eggs & Toast</td>
+            <td>Vegetable Pulao</td>
+            <td>Paneer Salad</td>
+        </tr>
+        <tr>
+            <td>Saturday</td>
+            <td>Poha & Fruits</td>
+            <td>Dal Rice</td>
+            <td>Vegetable Soup</td>
+        </tr>
+        <tr>
+            <td>Sunday</td>
+            <td>Healthy Dosa</td>
+            <td>Vegetable Biryani</td>
+            <td>Chapati & Dal</td>
+        </tr>
+    </table>
+    </div>
+</section>
+
+<section class="tips" id="tips">
+    <div class="section-title">
+        <h2>Healthy Eating Tips</h2>
+        <p>Small changes can create a healthier lifestyle.</p>
+    </div>
+
+    <div class="tips-grid">
+        <div class="tip">
+            <h3>💧 Stay Hydrated</h3>
+            <p>Drink water regularly throughout the day to maintain proper hydration.</p>
+        </div>
+
+        <div class="tip">
+            <h3>🥦 Eat More Vegetables</h3>
+            <p>Include a variety of colourful vegetables in your daily meals.</p>
+        </div>
+
+        <div class="tip">
+            <h3>🍎 Choose Whole Foods</h3>
+            <p>Prefer fruits, vegetables, whole grains and minimally processed foods.</p>
+        </div>
+
+        <div class="tip">
+            <h3>⏰ Eat Regularly</h3>
+            <p>Maintain consistent meal timings that work for your routine.</p>
+        </div>
+
+        <div class="tip">
+            <h3>🥜 Include Protein</h3>
+            <p>Add beans, lentils, eggs, nuts or other protein sources to your meals.</p>
+        </div>
+
+        <div class="tip">
+            <h3>🚶 Stay Active</h3>
+            <p>Combine nutritious food with regular physical activity.</p>
+        </div>
+    </div>
+</section>
+
+<section class="newsletter">
+    <h2>Start Your Healthy Journey!</h2>
+    <p>Subscribe to receive healthy eating inspiration and nutrition tips.</p>
+
+    <form id="newsletterForm">
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <button class="btn" type="submit">Subscribe</button>
+    </form>
+</section>
+
+<footer>
+    <div class="logo">Nourish<span>.</span></div>
+    <p>Eat Smart. Live Healthy. Stay Happy.</p>
+    <p style="margin-top:15px">© 2026 Nourish Healthy Food. All Rights Reserved.</p>
+</footer>
+
+<script>
+const recipes = [
+    {
+        name: "Avocado Toast",
+        category: "Breakfast",
+        calories: 250,
+        time: "10 min",
+        protein: "8g",
+        image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=700",
+        description: "Whole grain toast topped with fresh avocado."
+    },
+    {
+        name: "Fruit Smoothie Bowl",
+        category: "Breakfast",
+        calories: 220,
+        time: "10 min",
+        protein: "6g",
+        image: "https://images.unsplash.com/photo-1494597564530-871f2b93ac55?w=700",
+        description: "A refreshing bowl of fruits, seeds and yogurt."
+    },
+    {
+        name: "Vegetable Salad",
+        category: "Lunch",
+        calories: 180,
+        time: "15 min",
+        protein: "7g",
+        image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=700",
+        description: "Fresh vegetables with a delicious healthy dressing."
+    },
+    {
+        name: "Healthy Quinoa Bowl",
+        category: "Lunch",
+        calories: 320,
+        time: "25 min",
+        protein: "12g",
+        image: "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?w=700",
+        description: "Quinoa, vegetables and protein-rich ingredients."
+    },
+    {
+        name: "Grilled Vegetable Plate",
+        category: "Dinner",
+        calories: 280,
+        time: "30 min",
+        protein: "9g",
+        image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=700",
+        description: "A delicious combination of grilled vegetables."
+    },
+    {
+        name: "Healthy Soup",
+        category: "Dinner",
+        calories: 160,
+        time: "20 min",
+        protein: "6g",
+        image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=700",
+        description: "Warm vegetable soup packed with nutrients."
+    },
+    {
+        name: "Fresh Fruit Bowl",
+        category: "Snacks",
+        calories: 140,
+        time: "5 min",
+        protein: "3g",
+        image: "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=700",
+        description: "A colourful mix of seasonal fruits."
+    },
+    {
+        name: "Mixed Nuts",
+        category: "Snacks",
+        calories: 170,
+        time: "5 min",
+        protein: "6g",
+        image: "https://images.unsplash.com/photo-1508061253366-f7da158b6d46?w=700",
+        description: "A nutritious combination of almonds and nuts."
+    },
+    {
+        name: "Overnight Oats",
+        category: "Breakfast",
+        calories: 290,
+        time: "5 min",
+        protein: "11g",
+        image: "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=700",
+        description: "Oats mixed with milk, fruits and seeds."
+    }
+];
+
+let currentCategory = "All";
+
+function displayRecipes() {
+    const grid = document.getElementById("recipeGrid");
+    const search = document.getElementById("search").value.toLowerCase();
+
+    const filtered = recipes.filter(recipe => {
+        return (currentCategory === "All" ||
+                recipe.category === currentCategory) &&
+               (recipe.name.toLowerCase().includes(search) ||
+                recipe.description.toLowerCase().includes(search));
+    });
+
+    grid.innerHTML = "";
+
+    if (filtered.length === 0) {
+        grid.innerHTML = '<p class="no-results">No recipes found. Try another search.</p>';
+        return;
+    }
+
+    filtered.forEach(recipe => {
+        const card = document.createElement("div");
+        card.className = "recipe-card";
+
+        card.innerHTML = `
+            <img src="${recipe.image}" alt="${recipe.name}" loading="lazy">
+            <div class="recipe-info">
+                <h3>${recipe.name}</h3>
+                <p>${recipe.description}</p>
+                <div class="recipe-meta">
+                    <span>🔥 ${recipe.calories} kcal</span>
+                    <span>⏱ ${recipe.time}</span>
+                </div>
+                <p>Protein: ${recipe.protein}</p>
+                <button class="btn" onclick="showRecipe('${recipe.name}')">
+                    View Recipe
+                </button>
+            </div>
+        `;
+
+        grid.appendChild(card);
+    });
+}
+
+function showRecipe(name) {
+    const recipe = recipes.find(item => item.name === name);
+
+    alert(
+        "Recipe: " + recipe.name +
+        "\nCategory: " + recipe.category +
+        "\nCalories: " + recipe.calories + " kcal" +
+        "\nProtein: " + recipe.protein +
+        "\nPreparation Time: " + recipe.time +
+        "\n\n" + recipe.description +
+        "\n\nPlease prepare using your preferred ingredients and cooking method."
+    );
+}
+
+document.querySelectorAll(".filter-btn").forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+        currentCategory = button.dataset.category;
+        displayRecipes();
+    });
+});
+
+document.getElementById("search").addEventListener("input", displayRecipes);
+
+document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("Thank you for subscribing to Nourish!");
+    this.reset();
+});
+
+displayRecipes();
+</script>
+
+</body>
+</html>
