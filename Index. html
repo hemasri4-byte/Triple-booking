@@ -1,14 +1,1418 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="Triply - Book bus and train tickets easily." />
-  <title>Triply | Travel Made Simple</title>
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Triply - Book bus and train tickets with ease.">
+<title>Triply | Travel Made Simple</title><style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary: #ed6b36;
+  --dark: #172033;
+  --muted: #718096;
+  --light: #f8fafc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--dark);
+  min-width: 320px;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* NAVBAR */
+
+.navbar {
+  height: 75px;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 15px #0000000b;
+}
+
+.nav-container {
+  max-width: 1200px;
+  width: 90%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: 'Manrope', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.nav-button {
+  background: var(--primary);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 7px;
+  font-weight: 700;
+}
+
+.menu-btn {
+  display: none;
+  border: 0;
+  background: none;
+  font-size: 25px;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 580px;
+  display: flex;
+  align-items: center;
+  color: white;
+  background:
+    linear-gradient(90deg, #101c31e8, #101c3160),
+    url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=85')
+    center/cover;
+}
+
+.hero-content {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 75px 0;
+}
+
+.hero-tag {
+  color: #ffad87;
+  letter-spacing: 2px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.hero h1 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(45px, 7vw, 76px);
+  line-height: 1.15;
+  margin: 25px 0;
+}
+
+.hero h1 span {
+  color: #ff9b6a;
+}
+
+.hero p {
+  max-width: 520px;
+  line-height: 1.8;
+  color: #e2e8f0;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.primary-btn, .secondary-btn {
+  padding: 14px 22px;
+  border-radius: 7px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.primary-btn {
+  background: var(--primary);
+  color: white;
+}
+
+.secondary-btn {
+  border: 1px solid white;
+  color: white;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 55px;
+  margin-top: 65px;
+}
+
+.hero-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hero-stats strong {
+  font-size: 25px;
+}
+
+.hero-stats span {
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+/* COMMON SECTIONS */
+
+.container {
+  max-width: 1200px;
+  width: 90%;
+  margin: auto;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.section-label {
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.section-heading h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(27px, 4vw, 37px);
+  margin: 12px 0;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* BOOKING */
+
+.booking-section {
+  background: var(--light);
+}
+
+.booking-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px #17203312;
+}
+
+.tabs {
+  display: flex;
+  gap: 25px;
+  border-bottom: 1px solid #edf0f4;
+  margin-bottom: 25px;
+}
+
+.tab {
+  padding: 12px 15px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: white;
+  font-weight: 700;
+  color: #718096;
+}
+
+.tab.active {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.booking-form {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr 1fr 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.field {
+  padding: 13px;
+  border: 1px solid #e4e9ef;
+  border-radius: 8px;
+  min-width: 0;
+}
+
+.field label {
+  display: block;
+  color: #8490a0;
+  font-size: 10px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.field input, .field select {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.swap-btn {
+  border: 1px solid #f5d5c6;
+  background: #fff5ef;
+  color: var(--primary);
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  font-size: 19px;
+}
+
+.search-btn, .book-btn {
+  background: var(--primary);
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 15px 22px;
+  font-weight: 700;
+}
+
+.search-btn:hover, .book-btn:hover, .primary-btn:hover {
+  background: #d95424;
+}
+
+/* RESULTS */
+
+.results-section {
+  padding: 70px 0;
+}
+
+.results-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.results-heading h2 {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.results-heading p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.result-count {
+  background: #fff0e9;
+  color: var(--primary);
+  padding: 10px 15px;
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.results-list {
+  display: grid;
+  gap: 18px;
+}
+
+.trip-card {
+  padding: 23px;
+  border: 1px solid #e7ecf1;
+  border-radius: 12px;
+  transition: .2s;
+}
+
+.trip-card:hover {
+  border-color: #ed9c78;
+  box-shadow: 0 8px 25px #0000000b;
+}
+
+.trip-main {
+  display: grid;
+  grid-template-columns: 1.2fr 1.6fr .7fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.operator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.operator-icon {
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #fff0e9;
+  color: var(--primary);
+  font-size: 22px;
+}
+
+.operator h3 {
+  font-size: 15px;
+}
+
+.operator p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.journey-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.journey-time div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.journey-time strong {
+  font-size: 19px;
+}
+
+.journey-time span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.duration {
+  flex: 1;
+}
+
+.duration-line {
+  border-top: 1px dashed #b7c1ce;
+  margin-top: 8px;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.price span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.price strong {
+  font-size: 23px;
+}
+
+.price small {
+  color: #249765;
+}
+
+.trip-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  border-top: 1px solid #edf0f4;
+  margin-top: 20px;
+  padding-top: 15px;
+  color: #718096;
+  font-size: 11px;
+}
+
+.empty-results {
+  text-align: center;
+  padding: 50px 15px;
+  color: var(--muted);
+}
+
+.empty-results h3 {
+  margin: 15px 0;
+  color: var(--dark);
+}
+
+/* FEATURES */
+
+.features-section {
+  background: var(--light);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: white;
+  padding: 28px 22px;
+  border-radius: 12px;
+  border: 1px solid #edf0f4;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  background: #fff0e9;
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+
+.feature-card h3 {
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.feature-card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* DESTINATIONS */
+
+.destination-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.destination-card {
+  min-height: 330px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 25px;
+  color: white;
+  background-size: cover;
+  background-position: center;
+}
+
+.destination-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #101c31e8, transparent);
+}
+
+.destination-one {
+  background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80');
+}
+
+.destination-two {
+  background-image: url('https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=800&q=80');
+}
+
+.destination-three {
+  background-image: url('https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80');
+}
+
+.destination-info {
+  position: relative;
+  z-index: 1;
+}
+
+.destination-info small {
+  color: #ffad87;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+.destination-info h3 {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.destination-info p {
+  font-size: 13px;
+  color: #e2e8f0;
+}
+
+.destination-info button {
+  border: 0;
+  background: white;
+  color: var(--dark);
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-weight: 700;
+  margin-top: 16px;
+}
+
+/* FOOTER */
+
+.footer {
+  background: #121c2d;
+  color: white;
+  padding: 50px 0 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 35px;
+}
+
+.footer-logo {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.footer-logo span {
+  color: #ff9868;
+}
+
+.footer-content p {
+  color: #aab5c5;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: #c1cad6;
+}
+
+.footer-links a:hover {
+  color: #ff9868;
+}
+
+.copyright {
+  text-align: center;
+  border-top: 1px solid #2a3547;
+  padding: 20px;
+  color: #aab5c5;
+  font-size: 12px;
+}
+
+/* BOOKING MODAL */
+
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #101c31b8;
+  z-index: 200;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-backdrop.show {
+  display: flex;
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+}
+
+.modal h2 {
+  margin: 15px 0;
+}
+
+.modal-close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border: 0;
+  background: transparent;
+  font-size: 22px;
+}
+
+.modal-details {
+  background: var(--light);
+  padding: 17px;
+  border-radius: 10px;
+}
+
+.modal-details p {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.modal-details strong {
+  color: var(--dark);
+}
+
+.modal-note {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 15px 0;
+}
+
+.modal .search-btn {
+  width: 100%;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 1050px) {
+  .booking-form {
+    grid-template-columns: 1fr 35px 1fr;
+  }
+
+  .search-btn {
+    grid-column: 1 / -1;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trip-main {
+    grid-template-columns: 1fr 1.5fr .7fr;
+  }
+
+  .book-btn {
+    grid-column: 3;
+  }
+}
+
+@media(max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    padding: 25px;
+    box-shadow: 0 8px 15px #00000010;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .nav-button {
+    display: none;
+  }
+
+  .hero {
+    min-height: 540px;
+  }
+
+  .hero-stats {
+    gap: 25px;
+  }
+
+  .booking-form {
+    grid-template-columns: 1fr;
+  }
+
+  .swap-btn {
+    margin: auto;
+    transform: rotate(90deg);
+  }
+
+  .search-btn {
+    grid-column: auto;
+  }
+
+  .trip-main {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .operator {
+    grid-column: 1 / -1;
+  }
+
+  .journey-time {
+    grid-column: 1 / -1;
+  }
+
+  .book-btn {
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  .destination-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .destination-card {
+    min-height: 290px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media(max-width: 480px) {
+  .hero h1 {
+    font-size: 46px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-stats {
+    gap: 18px;
+  }
+
+  .hero-stats strong {
+    font-size: 21px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .trip-card {
+    padding: 16px;
+  }
+
+  .trip-footer {
+    gap: 10px;
+  }
+}
+</style></head><body><!-- NAVIGATION --><nav class="navbar">
+  <div class="nav-container">
+    <a href="#" class="logo">triply<span>.</span></a><div class="nav-links" id="navLinks">
+  <a href="#home">Home</a>
+  <a href="#booking">Book Tickets</a>
+  <a href="#destinations">Destinations</a>
+  <a href="#about">About</a>
+</div>
+
+<div>
+  <a href="#booking" class="nav-button">Book Now →</a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+</div>
+
+  </div>
+</nav><!-- HERO --><section class="hero" id="home">
+  <div class="hero-content">
+    <span class="hero-tag">✦ YOUR JOURNEY STARTS HERE</span><h1>Explore More.<br><span>Travel Better.</span></h1>
+
+<p>
+  Discover new destinations and book your bus and train
+  tickets with a simple, seamless travel experience.
+</p>
+
+<div class="hero-buttons">
+  <a href="#booking" class="primary-btn">Start Your Journey →</a>
+  <a href="#destinations" class="secondary-btn">Explore Destinations</a>
+</div>
+
+<div class="hero-stats">
+  <div><strong>100+</strong><span>Destinations</span></div>
+  <div><strong>500+</strong><span>Travel Options</span></div>
+  <div><strong>24/7</strong><span>Travel Support</span></div>
+</div>
+
+  </div>
+</section><!-- BOOKING --><section class="section booking-section" id="booking">
+  <div class="container"><div class="section-heading">
+  <span class="section-label">PLAN YOUR TRIP</span>
+  <h2>Where would you like to go?</h2>
+  <p>Find your perfect journey in just a few clicks.</p>
+</div>
+
+<div class="booking-card">
+
+  <div class="tabs">
+    <button class="tab active" id="busTab" onclick="changeType('bus')">🚌 Bus Tickets</button>
+    <button class="tab" id="trainTab" onclick="changeType('train')">🚆 Train Tickets</button>
+  </div>
+
+  <form class="booking-form" id="bookingForm">
+
+    <div class="field">
+      <label>📍 FROM</label>
+      <input id="from" list="cities" placeholder="Departure city" value="Hyderabad" required>
+    </div>
+
+    <button type="button" class="swap-btn" onclick="swapCities()" title="Swap cities">⇄</button>
+
+    <div class="field">
+      <label>📍 TO</label>
+      <input id="to" list="cities" placeholder="Destination city" value="Bangalore" required>
+    </div>
+
+    <datalist id="cities">
+      <option value="Hyderabad">
+      <option value="Bangalore">
+      <option value="Chennai">
+      <option value="Vijayawada">
+      <option value="Mumbai">
+      <option value="Delhi">
+      <option value="Pune">
+      <option value="Visakhapatnam">
+      <option value="Kochi">
+      <option value="Tirupati">
+      <option value="Coimbatore">
+      <option value="Kolkata">
+    </datalist>
+
+    <div class="field">
+      <label>📅 JOURNEY DATE</label>
+      <input type="date" id="date" required>
+    </div>
+
+    <div class="field">
+      <label>👥 PASSENGERS</label>
+      <select id="passengers">
+        <option value="1">1 Passenger</option>
+        <option value="2">2 Passengers</option>
+        <option value="3">3 Passengers</option>
+        <option value="4">4 Passengers</option>
+        <option value="5">5 Passengers</option>
+        <option value="6">6 Passengers</option>
+      </select>
+    </div>
+
+    <button type="submit" class="search-btn">🔍 Search</button>
+
+  </form>
+</div>
+
+  </div>
+</section><!-- SEARCH RESULTS --><section class="results-section" id="resultsSection" hidden>
+  <div class="container"><div class="results-heading">
+  <div>
+    <span class="section-label">AVAILABLE JOURNEYS</span>
+    <h2 id="routeTitle"></h2>
+    <p id="routeDetails"></p>
+  </div>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="results-list" id="resultsList"></div>
+
+  </div>
+</section><!-- FEATURES --><section class="section features-section" id="about">
+  <div class="container"><div class="section-heading">
+  <span class="section-label">WHY CHOOSE TRIPLY?</span>
+  <h2>Travel with confidence</h2>
+  <p>Everything you need for a comfortable booking experience.</p>
+</div>
+
+<div class="features-grid">
+
+  <div class="feature-card">
+    <div class="feature-icon">🛡️</div>
+    <h3>Secure Booking</h3>
+    <p>A simple booking experience with clear journey and fare details.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon">💳</div>
+    <h3>Transparent Pricing</h3>
+    <p>Compare travel options and view fares before selecting a journey.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon">🎧</div>
+    <h3>Travel Support</h3>
+    <p>Find helpful information throughout your travel planning process.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon">⏰</div>
+    <h3>Save Time</h3>
+    <p>Search and compare travel options from one convenient platform.</p>
+  </div>
+
+</div>
+
+  </div>
+</section><!-- DESTINATIONS --><section class="section" id="destinations">
+  <div class="container"><div class="section-heading">
+  <span class="section-label">GET INSPIRED</span>
+  <h2>Popular destinations</h2>
+  <p>Discover places worth exploring.</p>
+</div>
+
+<div class="destination-grid">
+
+  <div class="destination-card destination-one">
+    <div class="destination-info">
+      <small>EXPLORE INDIA</small>
+      <h3>Hyderabad</h3>
+      <p>The city of pearls</p>
+      <button onclick="setDestination('Hyderabad','Bangalore')">Explore →</button>
+    </div>
+  </div>
+
+  <div class="destination-card destination-two">
+    <div class="destination-info">
+      <small>EXPLORE INDIA</small>
+      <h3>Bangalore</h3>
+      <p>The garden city</p>
+      <button onclick="setDestination('Bangalore','Chennai')">Explore →</button>
+    </div>
+  </div>
+
+  <div class="destination-card destination-three">
+    <div class="destination-info">
+      <small>EXPLORE INDIA</small>
+      <h3>Chennai</h3>
+      <p>Gateway to South India</p>
+      <button onclick="setDestination('Chennai','Hyderabad')">Explore →</button>
+    </div>
+  </div>
+
+</div>
+
+  </div>
+</section><!-- FOOTER --><footer class="footer">
+  <div class="container"><div class="footer-content">
+  <div>
+    <a href="#" class="footer-logo">triply<span>.</span></a>
+    <p>Your journey, your way. Travel smarter with Triply.</p>
+  </div>
+
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#booking">Book Tickets</a>
+    <a href="#destinations">Destinations</a>
+    <a href="#about">About Us</a>
+  </div>
+</div>
+
+<div class="copyright">
+  © <span id="year"></span> Triply. All rights reserved.
+  | Designed for a better travel experience.
+</div>
+
+  </div>
+</footer><!-- BOOKING MODAL --><div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal"><button class="modal-close" onclick="closeModal()">×</button>
+
+<div class="feature-icon">🎫</div>
+
+<span class="section-label">TRIP SELECTED</span>
+<h2>Ready for your journey?</h2>
+
+<div class="modal-details" id="modalDetails"></div>
+
+<p class="modal-note">
+  This is a demonstration booking interface.
+  No real ticket is reserved and no payment is processed.
+</p>
+
+<button class="search-btn" onclick="closeModal()">Done</button>
+
+  </div>
+</div><script>
+
+// SAMPLE BUS DATA
+
+const busData = [
+  {
+    id: 1,
+    name: "Orange Travels",
+    type: "AC Sleeper",
+    from: "Hyderabad",
+    to: "Bangalore",
+    departure: "21:30",
+    arrival: "07:00",
+    duration: "9h 30m",
+    price: 899,
+    rating: 4.7,
+    seats: 12
+  },
+  {
+    id: 2,
+    name: "VRL Travels",
+    type: "AC Seater",
+    from: "Hyderabad",
+    to: "Bangalore",
+    departure: "22:00",
+    arrival: "08:30",
+    duration: "10h 30m",
+    price: 749,
+    rating: 4.5,
+    seats: 18
+  },
+  {
+    id: 3,
+    name: "IntrCity SmartBus",
+    type: "AC Sleeper",
+    from: "Hyderabad",
+    to: "Bangalore",
+    departure: "20:45",
+    arrival: "06:15",
+    duration: "9h 30m",
+    price: 1099,
+    rating: 4.8,
+    seats: 8
+  }
+];
+
+// SAMPLE TRAIN DATA
+
+const trainData = [
+  {
+    id: 4,
+    name: "Kacheguda Express",
+    type: "Train No. 17603",
+    from: "Hyderabad",
+    to: "Bangalore",
+    departure: "16:45",
+    arrival: "08:30",
+    duration: "15h 45m",
+    price: 650,
+    rating: 4.3,
+    seats: 45
+  },
+  {
+    id: 5,
+    name: "Yeshvantpur Express",
+    type: "Train No. 16570",
+    from: "Hyderabad",
+    to: "Bangalore",
+    departure: "21:10",
+    arrival: "11:00",
+    duration: "13h 50m",
+    price: 780,
+    rating: 4.6,
+    seats: 28
+  },
+  {
+    id: 6,
+    name: "Kacheguda Yesvantpur Express",
+    type: "Train No. 17603",
+    from: "Hyderabad",
+    to: "Bangalore",
+    departure: "18:00",
+    arrival: "09:15",
+    duration: "15h 15m",
+    price: 550,
+    rating: 4.2,
+    seats: 32
+  }
+];
+
+let travelType = "bus";
+let selectedTrip = null;
+
+// SET MINIMUM JOURNEY DATE
+
+const today = new Date();
+const localToday = new Date(
+  today.getTime() - today.getTimezoneOffset() * 60000
+).toISOString().split("T")[0];
+
+document.getElementById("date").min = localToday;
+document.getElementById("date").value = localToday;
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+// MOBILE NAVIGATION
+
+document.getElementById("menuBtn").addEventListener("click", () => {
+  document.getElementById("navLinks").classList.toggle("show");
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("navLinks").classList.remove("show");
+  });
+});
+
+// CHANGE BUS / TRAIN
+
+function changeType(type) {
+
+  travelType = type;
+
+  document.getElementById("busTab").classList.toggle(
+    "active", type === "bus"
+  );
+
+  document.getElementById("trainTab").classList.toggle(
+    "active", type === "train"
+  );
+
+  document.getElementById("resultsSection").hidden = true;
+}
+
+// SWAP CITIES
+
+function swapCities() {
+
+  const from = document.getElementById("from");
+  const to = document.getElementById("to");
+
+  const temp = from.value;
+
+  from.value = to.value;
+  to.value = temp;
+}
+
+// SEARCH TRIPS
+
+document.getElementById("bookingForm").addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const from = document.getElementById("from").value.trim();
+  const to = document.getElementById("to").value.trim();
+  const date = document.getElementById("date").value;
+  const passengers = Number(document.getElementById("passengers").value);
+
+  if (!from || !to || !date) {
+    alert("Please fill in all booking details.");
+    return;
+  }
+
+  if (from.toLowerCase() === to.toLowerCase()) {
+    alert("Departure and destination cannot be the same.");
+    return;
+  }
+
+  if (date < localToday) {
+    alert("Please select a valid future journey date.");
+    return;
+  }
+
+  const data = travelType === "bus" ? busData : trainData;
+
+  const results = data.filter(trip =>
+    trip.from.toLowerCase() === from.toLowerCase() &&
+    trip.to.toLowerCase() === to.toLowerCase()
+  );
+
+  displayResults(results, from, to, date, passengers);
+
+});
+
+// DISPLAY RESULTS
+
+function displayResults(results, from, to, date, passengers) {
+
+  const section = document.getElementById("resultsSection");
+  const list = document.getElementById("resultsList");
+
+  section.hidden = false;
+
+  document.getElementById("routeTitle").textContent =
+    from + " → " + to;
+
+  document.getElementById("routeDetails").textContent =
+    date + " | " + passengers + " Passenger(s) | " +
+    travelType.toUpperCase();
+
+  document.getElementById("resultCount").textContent =
+    results.length + " Options Found";
+
+  list.innerHTML = "";
+
+  if (results.length === 0) {
+
+    list.innerHTML = `
+      <div class="empty-results">
+        <h3>No journeys found</h3>
+        <p>No sample ${travelType} services are available for this route.</p>
+        <p>Try Hyderabad to Bangalore to view sample journeys.</p>
+      </div>
+    `;
+
+  } else {
+
+    results.forEach(trip => {
+
+      const card = document.createElement("div");
+      card.className = "trip-card";
+
+      card.innerHTML = `
+        <div class="trip-main">
+
+          <div class="operator">
+            <div class="operator-icon">
+              ${travelType === "bus" ? "🚌" : "🚆"}
+            </div>
+
+            <div>
+              <h3>${trip.name}</h3>
+              <p>${trip.type}</p>
+            </div>
+          </div>
+
+          <div class="journey-time">
+
+            <div>
+              <strong>${trip.departure}</strong>
+              <span>${trip.from}</span>
+            </div>
+
+            <div class="duration">
+              <span>${trip.duration}</span>
+              <div class="duration-line"></div>
+            </div>
+
+            <div>
+              <strong>${trip.arrival}</strong>
+              <span>${trip.to}</span>
+            </div>
+
+          </div>
+
+          <div class="price">
+            <span>Starting from</span>
+            <strong>₹${trip.price}</strong>
+            <small>${trip.seats} seats available</small>
+          </div>
+
+          <button class="book-btn">Select</button>
+
+        </div>
+
+        <div class="trip-footer">
+          <span>⭐ ${trip.rating} Rating</span>
+          <span>🛡️ Verified Operator</span>
+          <span>❄️ AC</span>
+          <span>✓ Comfortable Journey</span>
+        </div>
+      `;
+
+      card.querySelector(".book-btn").addEventListener("click", () => {
+        openModal(trip, date, passengers);
+      });
+
+      list.appendChild(card);
+
+    });
+
+  }
+
+  section.scrollIntoView({ behavior: "smooth" });
+
+}
+
+// OPEN BOOKING MODAL
+
+function openModal(trip, date, passengers) {
+
+  selectedTrip = trip;
+
+  const total = trip.price * passengers;
+
+  document.getElementById("modalDetails").innerHTML = `
+
+    <p><span>Operator</span><strong>${trip.name}</strong></p>
+
+    <p><span>Journey</span><strong>${trip.from} → ${trip.to}</strong></p>
+
+    <p><span>Travel Date</span><strong>${date}</strong></p>
+
+    <p><span>Passengers</span><strong>${passengers}</strong></p>
+
+    <p><span>Price per person</span><strong>₹${trip.price}</strong></p>
+
+    <p><span>Total Amount</span><strong>₹${total}</strong></p>
+
+  `;
+
+  document.getElementById("modalBackdrop").classList.add("show");
+
+}
+
+// CLOSE MODAL
+
+function closeModal() {
+
+  document.getElementById("modalBackdrop").classList.remove("show");
+
+  selectedTrip = null;
+
+}
+
+document.getElementById("modalBackdrop").addEventListener("click", function(e) {
+
+  if (e.target === this) {
+    closeModal();
+  }
+
+});
+
+// DESTINATION BUTTONS
+
+function setDestination(from, to) {
+
+  document.getElementById("from").value = from;
+  document.getElementById("to").value = to;
+
+  document.getElementById("booking").scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+</script></body>
 </html>
